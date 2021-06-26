@@ -6,6 +6,7 @@ const app = express();
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+app.use(express.urlencoded());//Parser
 
 var contactList = [
   {
@@ -37,8 +38,16 @@ app.get("/practice", function (req, res) {
 });
 
 
+//A Contact Coming from home 
 app.post('/create-contact',function(req,res){
-  return res.redirect('/practice');
+  // contactList.push({
+  //   name:req.body.name,
+  //   phone:req.body.phone
+  // })
+  contactList.push(req.body);
+  
+  //  return res.redirect('/');
+   return res.redirect('back');
 })
 
 app.listen(port, function (err) {
