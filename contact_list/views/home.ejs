@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h1>Contact List</h1>
+    <div>
+      <ul>
+        <% for (let i of contact_list ){%>
+        <li><p><%= i.name%></p></li>
+        <li><p><%= i.phone%></p></li>
+        <%}%>
+      </ul>
+    </div>
+  </body>
+</html>
