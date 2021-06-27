@@ -8,6 +8,19 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded());//Parser
 
+//Middleware 1
+app.use(function(req,res,next){
+  req.Myname="Aman";
+  // console.log("MiddleWare 1 ");
+  next();//got to next middleware
+})
+
+//Middleware 2
+app.use(function(req,res,next){
+  console.log("My Name from MW 1 ",req.Myname);
+  next();//got to next middleware
+})
+
 var contactList = [
   {
     name: "Aman",
@@ -24,6 +37,7 @@ var contactList = [
 ];
 
 app.get("/", function (req, res) {
+  console.log('From the Route Controller ',req.Myname);
   return res.render("home", { 
     title: "My Contacts List" ,
     contact_list: contactList
@@ -40,13 +54,7 @@ app.get("/practice", function (req, res) {
 
 //A Contact Coming from home 
 app.post('/create-contact',function(req,res){
-  // contactList.push({
-  //   name:req.body.name,
-  //   phone:req.body.phone
-  // })
   contactList.push(req.body);
-  
-  //  return res.redirect('/');
    return res.redirect('back');
 })
 
