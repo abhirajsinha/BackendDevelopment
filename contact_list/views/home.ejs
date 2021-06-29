@@ -18,8 +18,12 @@
               <p> <%= i.name %> </p>
               <p> <%= i.phone %> </p>
           </div>
+          <div class="delete-button">
+            <a href="/delete-contact/?phone=<%= i.phone %>">
+              <i class="fas fa-window-close"
+            </a>
+          </div>
           </li>
-          
         <%}%>
       </ul>
     </div>
@@ -34,3 +38,5 @@
 
   </body>
 </html>
+
+<!-- Commenting  -->
