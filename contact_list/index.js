@@ -4,6 +4,8 @@ const port = 8000;
 
 //Acquiring database
 const db=require('./config/mongoose')
+const Contact = require('./models/contact')
+
 
 const app = express();
 
