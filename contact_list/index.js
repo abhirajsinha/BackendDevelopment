@@ -57,8 +57,20 @@ app.get("/practice", function (req, res) {
 
 //A Contact Coming from home
 app.post("/create-contact", function (req, res) {
-  contactList.push(req.body);
-  return res.redirect("back");
+  // contactList.push(req.body);
+  // with database
+  Contact.create({
+    name:req.body.name,
+    phone:req.body.phone
+  },function(err,newContact){
+    if(err){
+      console.log('Error in creating contact');
+      return;
+    }
+    console.log('***************',newContact);
+    return res.redirect('back')
+  });
+  // return res.redirect("back");
 });
 
 // Through Query:
