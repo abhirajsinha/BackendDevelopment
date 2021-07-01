@@ -89,12 +89,24 @@ app.get("/delete-contact/", function (req, res) {
   /* Without using database: */
 
   // get the phone query from the url
-  let phone = req.query.phone;
-  let contactIndex = contactList.findIndex((contact) => contact.phone == phone);
-  if (contactIndex != -1) {
-    contactList.splice(contactIndex, 1);
-  }
-  return res.redirect("back");
+  // let phone = req.query.phone;
+  
+  // let contactIndex = contactList.findIndex((contact) => contact.phone == phone);
+  // if (contactIndex != -1) {
+  //   contactList.splice(contactIndex, 1);
+  // }
+  // return res.redirect("back");
+
+  // With using database:
+  let id = req.query.id;
+  Contact.findByIdAndDelete(id,function(err){
+    if(err){
+      console.log('error');
+      return;
+    }
+
+    return res.redirect("back");
+  })
 });
 
 app.listen(port, function (err) {
