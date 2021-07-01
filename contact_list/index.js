@@ -6,8 +6,8 @@ const app = express();
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
-app.use(express.urlencoded());//Parser
-app.use(express.static('assets'));
+app.use(express.urlencoded()); //Parser
+app.use(express.static("assets"));
 //Middleware 1
 // app.use(function(req,res,next){
 //   req.Myname="Aman";
@@ -38,11 +38,10 @@ var contactList = [
 
 app.get("/", function (req, res) {
   // console.log('From the Route Controller ',req.Myname);
-  return res.render("home", { 
-    title: "My Contacts List" ,
-    contact_list: contactList
+  return res.render("home", {
+    title: "My Contacts List",
+    contact_list: contactList,
   });
-  
 });
 
 app.get("/practice", function (req, res) {
@@ -51,16 +50,23 @@ app.get("/practice", function (req, res) {
   });
 });
 
-
-//A Contact Coming from home 
-app.post('/create-contact',function(req,res){
+//A Contact Coming from home
+app.post("/create-contact", function (req, res) {
   contactList.push(req.body);
-   return res.redirect('back');
-})
+  return res.redirect("back");
+});
 
-app.get('/delete-contact/:phone',function(req,res){
-  let phone=req.params.phone;
-  
+// Through Query:
+app.get('/delete-contact/', function(req, res){
+  // console.log(req.query);
+
+  /* Without using database: */
+  let phone = req.query.phone;
+  let contactIndex = contactList.findIndex(contact => contact.phone == phone);
+  if(contactIndex != -1){
+      contactList.splice(contactIndex, 1);
+  }
+  return res.redirect('back');
 })
 
 app.listen(port, function (err) {
