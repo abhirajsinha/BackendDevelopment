@@ -2,6 +2,9 @@ const path = require("path");
 const express = require("express");
 const port = 8000;
 
+//Acquiring database
+const db=require('./config/mongoose')
+
 const app = express();
 
 app.set("view engine", "ejs");
@@ -61,6 +64,8 @@ app.get('/delete-contact/', function(req, res){
   // console.log(req.query);
 
   /* Without using database: */
+
+  // get the phone query from the url
   let phone = req.query.phone;
   let contactIndex = contactList.findIndex(contact => contact.phone == phone);
   if(contactIndex != -1){
