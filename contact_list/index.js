@@ -42,7 +42,6 @@ var contactList = [
 
 app.get("/", function (req, res) {
   // console.log('From the Route Controller ',req.Myname);
-
   Contact.find({}, function (err, contacts) {
     if (err) {
       console.log("Error in fetching contact from DB");
@@ -54,6 +53,7 @@ app.get("/", function (req, res) {
     });
   });
 });
+
 
 app.get("/practice", function (req, res) {
   return res.render("practice", {
